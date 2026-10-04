@@ -218,3 +218,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Projet 11 ---
+# Données : on garde la structure des dossiers, pas les fichiers
+data/*/*
+!data/*/.gitkeep
+
+# Secrets et environnement
+.env
+.venv/
+
+# Power BI : on versionne le .pbit (modèle), pas le .pbix (lourd, avec données)
+*.pbix
+
+# Talend : fichiers temporaires et contextes avec identifiants
+.metadata/
+*.log
+etl/talend/**/context/*.properties
+
+# Modèles ML entraînés (régénérables)
+ml_nlp/models/

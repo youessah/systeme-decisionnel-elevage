@@ -1,0 +1,86 @@
+# Paramètres du projet 11 : système décisionnel pour un réseau d'éleveurs
+# Toutes les valeurs de génération sont des HYPOTHÈSES à documenter dans le dossier de conception.
+# Pour monter en charge, modifier ce fichier puis relancer les générateurs (même graine = mêmes données).
+
+projet:
+  graine: 42                      # graine aléatoire : garantit des données reproductibles
+  periode:
+    debut: "2023-01-01"
+    fin: "2025-12-31"
+
+chemins:
+  admin_codes: data/raw/cmr_admin_codes.xlsx
+  ndvi: data/raw/ndvi_cmr_full.csv
+  sortie_referentiel: data/generated/referentiel
+
+geographie:
+  # Les 6 départements retenus et leur chef-lieu
+  departements:
+    - {nom: Vina,         chef_lieu: Ngaoundéré}
+    - {nom: Mbéré,        chef_lieu: Meiganga}
+    - {nom: Diamaré,      chef_lieu: Maroua}
+    - {nom: Mayo-Tsanaga, chef_lieu: Mokolo}
+    - {nom: Mifi,         chef_lieu: Bafoussam}
+    - {nom: Menoua,       chef_lieu: Dschang}
+  # Code de région (préfixe des codes COD-AB) -> nom français
+  regions:
+    CM001: Adamaoua
+    CM004: Extrême-Nord
+    CM008: Ouest
+  jitter_degres: 0.12             # dispersion des exploitations autour du centre du département
+
+exploitations:
+  total: 200
+  repartition_regions: {Adamaoua: 70, Extrême-Nord: 70, Ouest: 60}
+  date_creation_min: "1995-01-01"
+  date_creation_max: "2022-12-31"
+
+  # Seuils de taille (effectif de l'espèce principale) : au-dessous du 1er = Petite, au-dessus du 2e = Grande
+  seuils_taille:
+    Bovins:    [50, 150]
+    Ovins:     [40, 120]
+    Caprins:   [40, 120]
+    Volailles: [300, 2000]
+
+  # Profil d'élevage par région
+  #   principale : probabilité que l'espèce soit l'espèce principale
+  #   secondaire : probabilité de détenir l'espèce en plus (si elle n'est pas la principale)
+  #   effectif   : [médiane, sigma (log-normale), minimum, maximum]
+  #   systeme    : probabilité de chaque système d'élevage
+  profils:
+    Adamaoua:
+      principale: {Bovins: 0.80, Ovins: 0.05, Caprins: 0.10, Volailles: 0.05}
+      secondaire: {Bovins: 0.30, Ovins: 0.25, Caprins: 0.35, Volailles: 0.30}
+      effectif:
+        Bovins:    [120, 0.8, 15, 1500]
+        Ovins:     [35, 0.6, 5, 300]
+        Caprins:   [30, 0.6, 5, 300]
+        Volailles: [60, 0.7, 10, 1000]
+      systeme: {Pastoral: 0.55, Transhumant: 0.35, Sédentaire: 0.10}
+    Extrême-Nord:
+      principale: {Bovins: 0.30, Ovins: 0.30, Caprins: 0.35, Volailles: 0.05}
+      secondaire: {Bovins: 0.35, Ovins: 0.45, Caprins: 0.50, Volailles: 0.25}
+      effectif:
+        Bovins:    [40, 0.7, 5, 500]
+        Ovins:     [45, 0.6, 5, 400]
+        Caprins:   [50, 0.6, 5, 400]
+        Volailles: [40, 0.7, 10, 500]
+      systeme: {Transhumant: 0.45, Pastoral: 0.25, Sédentaire: 0.30}
+    Ouest:
+      principale: {Bovins: 0.20, Ovins: 0.10, Caprins: 0.15, Volailles: 0.55}
+      secondaire: {Bovins: 0.20, Ovins: 0.15, Caprins: 0.35, Volailles: 0.30}
+      effectif:
+        Bovins:    [15, 0.7, 3, 120]
+        Ovins:     [12, 0.6, 3, 100]
+        Caprins:   [15, 0.6, 3, 120]
+        Volailles: [600, 1.0, 30, 15000]
+      systeme: {Périurbain: 0.45, Sédentaire: 0.55}
+
+veterinaires:
+  par_departement: 4
+  part_public: 0.5
+
+# Volumes des sources suivantes (utilisés aux étapes de génération des faits)
+volumes:
+  colliers_gps: 300
+  positions_par_jour: 24

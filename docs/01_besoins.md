@@ -51,7 +51,7 @@ Un réseau d'éleveurs fictif, réparti sur ces trois régions, regroupe des exp
 | **Espèces** | Bovins, ovins, caprins, volailles |
 | **Période simulée** | 2023 à 2025 (à ajuster si les sources publiques ne couvrent pas toute la période) |
 | **Réseau simulé** | Environ 200 exploitations : ~70 Adamaoua, ~70 Extrême-Nord, ~60 Ouest (paramétrable) |
-| **Devise** | Franc CFA (XAF), avec EUR, USD et NGN pour les comparaisons |
+| **Devise** | Franc CFA (XAF), avec EUR et USD pour les comparaisons |
 | **Langue des textes** | Français (comptes rendus vétérinaires) ; WAHIS est principalement en anglais |
 | **Mode de traitement** | Lots planifiés (quotidiens), pas de temps réel |
 
@@ -139,7 +139,7 @@ PostgreSQL 18 (entrepôt et source cheptel), MySQL 9.1 via WAMP (source vaccinat
 ## 10. Hypothèses et contraintes
 
 - Les données synthétiques sont construites avec un signal réaliste (mortalité liée à la chaleur, aux retards de vaccination et aux délais d'intervention ; anomalies GPS étiquetées), faute de quoi les modèles seraient sans intérêt.
-- Les sources publiques doivent être vérifiées (disponibilité, licence, couverture du Cameroun et de la période) avant la génération. Si WAHIS contient peu de foyers pour la zone, un complément synthétique de même structure sera ajouté et signalé comme tel.
+- Les sources publiques ont été vérifiées le 06/10/2026 (voir `03_sources_publiques.md`). WAHIS fournit des données réelles par région et par semestre jusqu'en 2023, mais rien pour 2024-2025 : ces années sont simulées, calibrées sur l'historique réel, et signalées par une colonne `origine` (`WAHIS` ou `SIMULE`). Les données FAO de prix ne donnent des prix absolus qu'en 2003 : elles servent de repère et non de référence de niveau.
 - Talend Open Studio ne fournit ni intégration Git ni planificateur : les jobs seront exportés manuellement et planifiés avec le Planificateur de tâches Windows.
 - Projet individuel : le périmètre est volontairement borné (3 régions, 4 espèces, 25 indicateurs, 5 modèles, 5 pages).
 

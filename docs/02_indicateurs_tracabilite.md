@@ -34,7 +34,7 @@ Ce document définit les **25 indicateurs** imposés par le cahier des charges (
 
 | N° | Indicateur | Formule | Unité · périodicité | Sources et champs | Fait |
 |---|---|---|---|---|---|
-| 11 | Nombre de foyers de maladies | Nombre de foyers distincts | Foyers · mensuel | S3 : maladie, date_début, région, espèce, nb_cas | `fact_foyer_maladie` |
+| 11 | Nombre de foyers de maladies | Somme des nouveaux foyers (foyers débutés pendant la période) | Foyers · semestriel | S3 : année, semestre, division administrative, maladie, nouveaux foyers (lignes sans espèce), colonne `origine` | `fact_foyer_maladie` |
 | 12 | Taux de morbidité | Animaux malades ÷ animaux exposés × 100 | % · mensuel | S13 : nb_animaux_malades ; S4 : effectif | `fact_intervention_veto` + `fact_cheptel` |
 | 13 | Délai d'intervention vétérinaire | Moyenne de (date_intervention − date_signalement) | Heures · mensuel | S13 : date_signalement, date_intervention | `fact_intervention_veto` |
 | 14 | Coût des traitements | Σ (médicaments + honoraires) | XAF · mensuel | S13 : coût_médicaments, honoraires, devise ; S15 | `fact_intervention_veto` |
@@ -76,7 +76,7 @@ Ce document définit les **25 indicateurs** imposés par le cahier des charges (
 | ML 2 : prévision des prix et volumes | Série mensuelle des prix et volumes par espèce, jours fériés, change | Prix et volumes futurs | Saisonnalité et tendance à reproduire |
 | ML 3 : anomalies GPS | Vitesse, distance parcourue, immobilité, sortie de zone | Anomalie (maladie ou vol) | Anomalies étiquetées pour l'évaluation |
 | NLP 1 : symptômes et maladies | Comptes rendus vétérinaires (XML, texte libre en français) | Symptômes et maladies extraits | 50 à 100 textes annotés à la main |
-| NLP 2 : résumé des foyers | Textes ou champs descriptifs WAHIS par région | Résumé par région | Langue à préciser (WAHIS surtout en anglais) |
+| NLP 2 : résumé des foyers | Commentaires épidémiologiques des fiches d'événements WAHIS (texte réel, peu d'événements) et textes générés par région | Résumé par région | L'export quantitatif ne contient pas de texte ; langue à préciser (WAHIS surtout en anglais) |
 
 ---
 
@@ -97,7 +97,7 @@ C'est le résultat clé de la traçabilité : si un champ de ce tableau manque d
 | **S12 Météo** | horodatage, zone, température, humidité relative |
 | **S13 Vétérinaires** | id_intervention, id_vétérinaire, id_exploitation, espèce, maladie, date_signalement, date_intervention, nb_animaux_malades, coût_médicaments, honoraires, devise, **compte_rendu** (texte libre) |
 | **S14 GPS** | id_collier, id_animal, id_exploitation, horodatage, lat, lon, vitesse (optionnel), indicateur d'anomalie (réservé à l'évaluation, non chargé dans l'entrepôt) |
-| **S3 WAHIS** | maladie, espèce, pays, région, date_début, date_fin, nb_cas, nb_décès, description |
+| **S3 WAHIS** (export « Données quantitatives ») | année, semestre, division administrative, maladie, génotype/sous-type, catégorie animale, espèce, nouveaux foyers, sensibles, cas, mis à mort, morts, vaccinés. Valeurs manquantes écrites `-` ; les nouveaux foyers sont portés par des lignes dont l'espèce est vide |
 | **S2 FAOSTAT prix** | pays, produit, année, prix, devise |
 | **S1 FAOSTAT élevage** | pays, espèce, année, effectif |
 | **S15 Taux de change** | date, devise_source, devise_cible, taux |

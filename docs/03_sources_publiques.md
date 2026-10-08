@@ -17,7 +17,7 @@ Ce document recense, pour chacune des 6 sources publiques, où la télécharger,
 | 1 | FAOSTAT élevage | Téléchargement | CC BY 4.0 | ✅ existe, ⚠️ dernière année pour le Cameroun | Faible |
 | 2 | FAOSTAT prix producteurs | Téléchargement | CC BY 4.0 | ✅ existe, ⚠️ couverture Cameroun | Moyen |
 | 3 | WAHIS | Interface publique | Accès public sans restriction | ⚠️ nombre de foyers pour le Cameroun inconnu | **Élevé** |
-| 11 | NDVI (WFP/NASA) | Téléchargement HDX | CC BY (à confirmer sur la page Cameroun) | ✅ jeu « Cameroon: NDVI at Subnational Level » existe | Faible |
+| 11 | NDVI (WFP/NASA) | Téléchargement HDX | CC BY (à confirmer sur la page Cameroun) | ✅ téléchargé, complet (2002 à sept. 2026) | Faible |
 | 12 | Open-Meteo | API sans clé | Gratuit non commercial, attribution | ✅ endpoint et variables confirmés | Faible |
 | 15 | Taux de change | API sans clé | CC0 | ✅ existe, ⚠️ historique 2023 | Faible |
 
@@ -63,15 +63,16 @@ Ce document recense, pour chacune des 6 sources publiques, où la télécharger,
 
 ### Source 11 : Pâturages (NDVI)
 
-- **Liens**
-  - Jeu : « Cameroon: NDVI at Subnational Level » sur HDX ✅ (confirmé dans le répertoire ReliefWeb : https://response.reliefweb.int/cameroon/data?page=0)
-  - Adresse HDX probable : https://data.humdata.org/dataset/cmr-ndvi-subnational ⚠️ (déduite du modèle des autres pays, par exemple `sur-ndvi-subnational`)
-  - Fichier probable : `cmr-ndvi-adm2-full.csv` ⚠️ (modèle des autres pays : `xxx-ndvi-adm2-full.csv`)
-- **Ce que les données contiennent** (d'après les pages des autres pays de la même série) : indicateurs par décade (10 jours) calculés à partir du satellite MODIS de la NASA, agrégés par unité administrative : NDVI de la décade (`vim`), moyenne de long terme (`vim_lta`), anomalie en % (`viq`), et nombre de pixels utilisés (`n_pixels`). Série depuis 2002, mise à jour tous les 15 jours environ. ✅
-- **Adéquation avec ton projet** : le niveau administratif 2 (« adm2 ») correspond aux **départements** au Cameroun, donc exactement ta maille d'étude (Vina, Mbéré, Diamaré, Mayo-Tsanaga, Mifi, Menoua). Le fichier est mondial par pays : on filtre les 6 départements et la période 2023-2025.
-- **Licence** : « Creative Commons Attribution International » sur les pages des autres pays de la série ; ⚠️ à confirmer sur la page Cameroun.
-- **Risque** : faible. Vérifier que les noms de départements du fichier (en anglais ou en français, avec ou sans accents) correspondent à ta liste.
-- **Plan B** : si le fichier Cameroun est indisponible, utiliser le jeu d'un pays voisin n'a pas de sens ; on générera plutôt un NDVI synthétique saisonnier (pic en saison des pluies, plus bas en saison sèche, plus faible dans l'Extrême-Nord), signalé comme tel.
+**Statut : ✅ vérifié et téléchargé le 04/10/2026.**
+
+- **Jeu** : « Cameroon: NDVI at Subnational Level » sur HDX, page https://data.humdata.org/dataset/cmr-ndvi-subnational ✅
+- **Fichier retenu** : `cmr-ndvi-subnat-full.csv` (3,7 Mo, série complète). Le second fichier, `cmr-ndvi-subnat-5ytd.csv`, ne contient que les cinq dernières années glissantes et n'est pas utilisé. Rangé dans `data/raw/ndvi_cmr_full.csv`.
+- **Métadonnées** : période du 1er juillet 2002 au 20 septembre 2026, mise à jour mensuelle, modifié le 23/09/2026, source NASA (MODIS) et WFP, identifiant du jeu `6da39ddb-76b0-4510-8648-c0f3fb15d52b`. ✅
+- **Structure du fichier** : 59 296 lignes et 8 colonnes : `date`, `adm_level`, `adm_id`, `PCODE`, `n_pixels`, `vim` (NDVI de la décade), `vim_avg` (moyenne de long terme), `viq` (anomalie en %). ✅
+- **Contrôle arithmétique** : 59 296 = 68 unités × 872 décades. Les 68 unités correspondent à **10 régions et 58 départements** (chiffres du référentiel officiel COD-AB), et les 872 décades couvrent juillet 2002 à septembre 2026 à raison de 3 par mois. Le fichier est donc complet et sans trou apparent. ✅
+- **Point d'attention** : le fichier ne contient **que des codes** (`PCODE`, `adm_id`), pas de noms. Il faut une table de correspondance code → nom pour retrouver Vina, Mbéré, Diamaré, Mayo-Tsanaga, Mifi et Menoua. Elle est fournie par le jeu de référence **COD-AB** (limites administratives) ou **COD-PS** (statistiques de population), publiés sur HDX : https://data.humdata.org/dataset/cod-ab-cmr et https://data.humdata.org/dataset/cod-ps-cmr ✅
+- **Licence** : ⚠️ à relever dans la page de métadonnées HDX (les autres pays de la même série sont en « Creative Commons Attribution International »).
+- **Plan B** : en cas de problème de correspondance, générer un NDVI synthétique saisonnier signalé comme tel (peu probable : le fichier est complet).
 
 ### Source 12 : Météo (Open-Meteo, API)
 
@@ -133,7 +134,7 @@ Ce document recense, pour chacune des 6 sources publiques, où la télécharger,
 | 1 | Coller l'adresse de test Open-Meteo (§ source 12) dans le navigateur | Un JSON avec températures et humidités |
 | 2 | Coller l'adresse du taux de change du 6 mars 2024 (§ source 15) et chercher `xaf` dans la page | Une valeur proche de 656 si la base est l'euro |
 | 3 | Tester une date de 2023 avec l'ancien format (§ source 15) | Un JSON ; sinon, on applique le plan B |
-| 4 | Sur data.humdata.org, rechercher « Cameroon NDVI Subnational » | Une page avec `cmr-ndvi-adm2-full.csv` ; noter la licence affichée |
+| 4 | Sur data.humdata.org, rechercher « Cameroon NDVI Subnational » | Fait : fichier `cmr-ndvi-subnat-full.csv` ; reste à noter la licence |
 | 5 | Sur data.humdata.org, rechercher « Cameroon Food Prices » | Une page avec les prix producteurs ; noter la dernière année |
 | 6 | Sur wahis.woah.org, filtrer le pays « Cameroon » et noter le nombre d'événements 2023-2025 | Un nombre, même faible (il décide de l'ampleur du complément synthétique) |
 | 7 | Télécharger le fichier FAOSTAT QCL (§ source 1) et vérifier la présence du Cameroun | Des lignes « Cameroon » avec l'élément « Stocks » |
@@ -153,3 +154,28 @@ Note les résultats dans `docs/journal.md` : ils décident de l'ampleur de la g�
 4. Note dans `docs/sources_manifest.csv` (ou dans le journal) la date de téléchargement et l'adresse d'origine.
 
 Attention : ton `.gitignore` ignore le contenu de `data/`. Les fichiers figés ne seront donc **pas** envoyés sur GitHub. Sauvegarde-les sur un autre support. Seul le manifeste, placé dans `docs/`, est versionné.
+
+
+---
+
+## 6. Bilan de la vérification (06/10/2026)
+
+Cette section remplace les hypothèses des sections précédentes lorsqu'elles diffèrent.
+
+| N° | Source | Statut | Couverture constatée |
+|---|---|---|---|
+| 1 | FAOSTAT élevage | ✅ | 2015 à 2024, 4 espèces (bovins, caprins, ovins, poulets en milliers de têtes) ; pas de 2025 |
+| 2 | Prix FAO producteurs | ✅ repère seulement | Indice 1991-2025 ; prix absolus en 1992-2003 (bovin, poulet, lait, œufs) et 2003 (ovin, caprin, porcin) ; aucune valeur mensuelle pour les animaux ; indice 2003 identique pour tous les produits (valeur estimée) |
+| 3 | WAHIS, données quantitatives | 🔶 export final à refaire | Réel 2005-2023 par région et semestre : Adamaoua (2005-2007, 2012, 2014-2023), Ouest (2005-2023 avec trous), Extrême-Nord (2020-2023) ; rien en 2024-2025 |
+| 11 | NDVI | ✅ | 2002-07-01 à 2026-09-20, 68 unités administratives, 872 décades |
+| 12 | Open-Meteo | ✅ | Archive horaire testée sur Ngaoundéré |
+| 15 | Taux de change | ✅ | FAO : XAF par USD, mensuel 2023-2025 (606,57 en 2023, 606,35 en 2024, 581,93 en 2025) ; API testée depuis le 06/03/2024 ; XAF/EUR fixe à 655,957 |
+
+### Décisions
+- **Foyers** : 2005-2023 réels quand ils existent, 2024-2025 simulés ; grain semestriel pour les données réelles.
+- **Devises** : XAF, EUR, USD. EUR/USD déduit de 655,957 ÷ (XAF par USD).
+- **Prix** : repères FAO étiquetés « estimation reconstituée » ; niveaux du marché simulé à calibrer ensuite.
+- **WAHIS** : l'export final (Cameroun, 3 régions, toutes années, toutes maladies, toutes espèces) sera rangé dans `data/raw/wahis_quantitatif_complet.csv`.
+
+### Défauts de qualité observés sur les données réelles (utiles à l'ETL)
+Valeurs manquantes écrites `-` ; noms de maladies en plusieurs graphies (espaces et fautes) ; semestre en texte (« Jan-Jui 2023 ») ; codes FAO avec apostrophe ; nombre de lignes dépendant des filtres d'export.

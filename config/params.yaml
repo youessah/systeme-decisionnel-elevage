@@ -84,3 +84,30 @@ veterinaires:
 volumes:
   colliers_gps: 300
   positions_par_jour: 24
+
+# ---------------------------------------------------------------------------
+# Ajouts : stress thermique, délais vétérinaires et signal de mortalité
+# ---------------------------------------------------------------------------
+climat:
+  fichier_meteo: data/generated/meteo_horaire_reference.csv
+  seuil_thi: 78          # jours de stress : THI maximal journalier > 78 (72 dépassé presque tous les jours)
+  seuil_thi_severe: 82
+
+delais_veterinaires:
+  mediane_heures: {Privé: 18, Public: 30}                                    # délai signalement -> intervention
+  facteur_systeme: {Pastoral: 1.2, Transhumant: 1.4, Sédentaire: 1.0, Périurbain: 0.8}
+
+vaccination:
+  conformite_beta: [6, 3]   # conformité de base d'une exploitation (moyenne = 6/9, soit 67 %)
+  amplitude_saison: 0.08    # hausse de la conformité après les campagnes (mars et septembre)
+
+signal:                      # poids des facteurs dans le risque de mortalité (hypothèses de simulation)
+  ecart_type_exploitation: 0.35
+  coef_stress_thermique: 1.0     # x part des jours de stress du mois
+  coef_non_vaccination: 1.2      # x (1 - conformité vaccinale)
+  coef_delai_veto: 0.30          # x log(délai / 24 h)
+  coef_pression_foyers: 0.25     # x pression régionale standardisée
+  coef_pature: 0.20              # x (- NDVI standardisé)
+  multiplicateur_min: 0.25
+  multiplicateur_max: 6.0
+  sortie_pilotes: data/generated/pilotes

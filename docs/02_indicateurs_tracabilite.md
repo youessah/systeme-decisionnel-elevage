@@ -64,7 +64,7 @@ Ce document définit les **25 indicateurs** imposés par le cahier des charges (
 | 24 | Distances de transhumance | Distance moyenne et totale origine → destination des mouvements de type transhumance | km · saisonnier, annuel | S6 : type_mouvement, coordonnées origine et destination, distance_km | `fact_mouvement` |
 | 25 | Jours de stress thermique | Nombre de jours où le THI journalier dépasse le seuil | Jours · mensuel | S12 : température et humidité horaires, zone | `fact_environnement` |
 
-**Définition de l'indicateur 25** : indice température-humidité (THI) = (1,8 × T + 32) − (0,55 − 0,0055 × HR) × (1,8 × T − 26), avec T la température en °C et HR l'humidité relative en %. Un jour compte comme « stress thermique » si son THI maximal dépasse le seuil retenu. Valeur de départ : **72**, seuil classique pour les bovins laitiers, à justifier dans le dossier de conception (les seuils varient selon l'espèce).
+**Définition de l'indicateur 25** : indice température-humidité (THI) = (1,8 × T + 32) − (0,55 − 0,0055 × HR) × (1,8 × T − 26), avec T la température en °C et HR l'humidité relative en %. Un jour compte comme « stress thermique » si son THI maximal dépasse le seuil retenu. **Seuil retenu : 78** (stress sévère : 82). Le seuil classique de 72 a été écarté : sur les données Open-Meteo 2023-2025, il est dépassé 89 à 99 % des jours dans 5 départements sur 6 et ne discrimine rien, alors qu'à 78 la part des jours va de 0 % (Menoua) à 70 % (Diamaré). Justification complémentaire : les seuils usuels viennent de vaches laitières de races tempérées, alors que le cheptel est surtout composé de zébus, plus tolérants à la chaleur (référence à citer).
 
 ---
 

@@ -103,11 +103,42 @@ vaccination:
 
 signal:                      # poids des facteurs dans le risque de mortalité (hypothèses de simulation)
   ecart_type_exploitation: 0.35
-  coef_stress_thermique: 1.0     # x part des jours de stress du mois
-  coef_non_vaccination: 1.2      # x (1 - conformité vaccinale)
-  coef_delai_veto: 0.30          # x log(délai / 24 h)
+  coef_stress_thermique: 0.8     # x part des jours de stress du mois
+  coef_non_vaccination: 2.5      # x (1 - conformité vaccinale)
+  coef_delai_veto: 0.60          # x log(délai / 24 h)
   coef_pression_foyers: 0.25     # x pression régionale standardisée
   coef_pature: 0.20              # x (- NDVI standardisé)
   multiplicateur_min: 0.25
   multiplicateur_max: 6.0
   sortie_pilotes: data/generated/pilotes
+
+# ---------------------------------------------------------------------------
+# Source 4 (cheptel) et source 5 (vaccinations) : hypothèses de génération
+# ---------------------------------------------------------------------------
+cheptel:
+  sortie: data/generated/cheptel
+  part_femelles: {Bovins: 0.70, Ovins: 0.72, Caprins: 0.72}
+  age_max_initial_mois: {Bovins: 120, Ovins: 72, Caprins: 72}
+  age_reproduction_mois: {Bovins: 30, Ovins: 10, Caprins: 10}
+  age_jeune_mois: {Bovins: 6, Ovins: 4, Caprins: 4}
+  naissance_mensuelle_par_femelle: {Bovins: 0.031, Ovins: 0.046, Caprins: 0.048}
+  mortalite_mensuelle_base: {Bovins: 0.0040, Ovins: 0.0065, Caprins: 0.0065}
+  facteur_jeune: 2.5                 # surmortalité des jeunes
+  sortie_mensuelle_base: {Bovins: 0.0080, Ovins: 0.0180, Caprins: 0.0180}   # ventes et abattages
+  part_abattage_sorties: 0.30
+  achats_mensuels_par_tete: 0.0015
+  mois_tabaski: ["2023-06-01", "2024-06-01", "2025-06-01"]   # pic de ventes d'ovins et de caprins
+  facteur_tabaski: {Bovins: 1.5, Ovins: 3.0, Caprins: 3.0}
+  volailles:
+    part_chair_si_principale: 0.6
+    chair: {cycle_jours: [42, 56], pause_jours: [7, 21], mortalite_hebdo_base: 0.010}
+    ponte: {cycle_jours: 364, pause_jours: [7, 21], mortalite_hebdo_base: 0.003}
+    probabilite_epidemie_hebdo: 0.0015
+  defauts: {taux: 0.004}             # part de lignes volontairement erronées (voir fichier des défauts)
+
+vaccinations:
+  sortie: data/generated/vaccinations
+  part_retard_rattrape: 0.45         # part des doses manquées qui sont rattrapées en retard
+  part_autre_veterinaire: 0.10
+  participation_ferme: {"V_FA|Ovins": 0.3, "V_FA|Caprins": 0.3}
+  defauts: {taux: 0.003}

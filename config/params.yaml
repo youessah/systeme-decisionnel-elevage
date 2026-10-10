@@ -1,0 +1,144 @@
+# Paramètres du projet 11 : système décisionnel pour un réseau d'éleveurs
+# Toutes les valeurs de génération sont des HYPOTHÈSES à documenter dans le dossier de conception.
+# Pour monter en charge, modifier ce fichier puis relancer les générateurs (même graine = mêmes données).
+
+projet:
+  graine: 42                      # graine aléatoire : garantit des données reproductibles
+  periode:
+    debut: "2023-01-01"
+    fin: "2025-12-31"
+
+chemins:
+  admin_codes: data/raw/cmr_admin_codes.xlsx
+  ndvi: data/raw/ndvi_cmr_full.csv
+  sortie_referentiel: data/generated/referentiel
+
+geographie:
+  # Les 6 départements retenus et leur chef-lieu
+  departements:
+    - {nom: Vina,         chef_lieu: Ngaoundéré}
+    - {nom: Mbéré,        chef_lieu: Meiganga}
+    - {nom: Diamaré,      chef_lieu: Maroua}
+    - {nom: Mayo-Tsanaga, chef_lieu: Mokolo}
+    - {nom: Mifi,         chef_lieu: Bafoussam}
+    - {nom: Menoua,       chef_lieu: Dschang}
+  # Code de région (préfixe des codes COD-AB) -> nom français
+  regions:
+    CM001: Adamaoua
+    CM004: Extrême-Nord
+    CM008: Ouest
+  jitter_degres: 0.12             # dispersion des exploitations autour du centre du département
+
+exploitations:
+  total: 200
+  repartition_regions: {Adamaoua: 70, Extrême-Nord: 70, Ouest: 60}
+  date_creation_min: "1995-01-01"
+  date_creation_max: "2022-12-31"
+
+  # Seuils de taille (effectif de l'espèce principale) : au-dessous du 1er = Petite, au-dessus du 2e = Grande
+  seuils_taille:
+    Bovins:    [50, 150]
+    Ovins:     [40, 120]
+    Caprins:   [40, 120]
+    Volailles: [300, 2000]
+
+  # Profil d'élevage par région
+  #   principale : probabilité que l'espèce soit l'espèce principale
+  #   secondaire : probabilité de détenir l'espèce en plus (si elle n'est pas la principale)
+  #   effectif   : [médiane, sigma (log-normale), minimum, maximum]
+  #   systeme    : probabilité de chaque système d'élevage
+  profils:
+    Adamaoua:
+      principale: {Bovins: 0.80, Ovins: 0.05, Caprins: 0.10, Volailles: 0.05}
+      secondaire: {Bovins: 0.30, Ovins: 0.25, Caprins: 0.35, Volailles: 0.30}
+      effectif:
+        Bovins:    [120, 0.8, 15, 1500]
+        Ovins:     [35, 0.6, 5, 300]
+        Caprins:   [30, 0.6, 5, 300]
+        Volailles: [60, 0.7, 10, 1000]
+      systeme: {Pastoral: 0.55, Transhumant: 0.35, Sédentaire: 0.10}
+    Extrême-Nord:
+      principale: {Bovins: 0.30, Ovins: 0.30, Caprins: 0.35, Volailles: 0.05}
+      secondaire: {Bovins: 0.35, Ovins: 0.45, Caprins: 0.50, Volailles: 0.25}
+      effectif:
+        Bovins:    [40, 0.7, 5, 500]
+        Ovins:     [45, 0.6, 5, 400]
+        Caprins:   [50, 0.6, 5, 400]
+        Volailles: [40, 0.7, 10, 500]
+      systeme: {Transhumant: 0.45, Pastoral: 0.25, Sédentaire: 0.30}
+    Ouest:
+      principale: {Bovins: 0.20, Ovins: 0.10, Caprins: 0.15, Volailles: 0.55}
+      secondaire: {Bovins: 0.20, Ovins: 0.15, Caprins: 0.35, Volailles: 0.30}
+      effectif:
+        Bovins:    [15, 0.7, 3, 120]
+        Ovins:     [12, 0.6, 3, 100]
+        Caprins:   [15, 0.6, 3, 120]
+        Volailles: [600, 1.0, 30, 15000]
+      systeme: {Périurbain: 0.45, Sédentaire: 0.55}
+
+veterinaires:
+  par_departement: 4
+  part_public: 0.5
+
+# Volumes des sources suivantes (utilisés aux étapes de génération des faits)
+volumes:
+  colliers_gps: 300
+  positions_par_jour: 24
+
+# ---------------------------------------------------------------------------
+# Ajouts : stress thermique, délais vétérinaires et signal de mortalité
+# ---------------------------------------------------------------------------
+climat:
+  fichier_meteo: data/generated/meteo_horaire_reference.csv
+  seuil_thi: 78          # jours de stress : THI maximal journalier > 78 (72 dépassé presque tous les jours)
+  seuil_thi_severe: 82
+
+delais_veterinaires:
+  mediane_heures: {Privé: 18, Public: 30}                                    # délai signalement -> intervention
+  facteur_systeme: {Pastoral: 1.2, Transhumant: 1.4, Sédentaire: 1.0, Périurbain: 0.8}
+
+vaccination:
+  conformite_beta: [6, 3]   # conformité de base d'une exploitation (moyenne = 6/9, soit 67 %)
+  amplitude_saison: 0.08    # hausse de la conformité après les campagnes (mars et septembre)
+
+signal:                      # poids des facteurs dans le risque de mortalité (hypothèses de simulation)
+  ecart_type_exploitation: 0.35
+  coef_stress_thermique: 0.8     # x part des jours de stress du mois
+  coef_non_vaccination: 2.5      # x (1 - conformité vaccinale)
+  coef_delai_veto: 0.60          # x log(délai / 24 h)
+  coef_pression_foyers: 0.25     # x pression régionale standardisée
+  coef_pature: 0.20              # x (- NDVI standardisé)
+  multiplicateur_min: 0.25
+  multiplicateur_max: 6.0
+  sortie_pilotes: data/generated/pilotes
+
+# ---------------------------------------------------------------------------
+# Source 4 (cheptel) et source 5 (vaccinations) : hypothèses de génération
+# ---------------------------------------------------------------------------
+cheptel:
+  sortie: data/generated/cheptel
+  part_femelles: {Bovins: 0.70, Ovins: 0.72, Caprins: 0.72}
+  age_max_initial_mois: {Bovins: 120, Ovins: 72, Caprins: 72}
+  age_reproduction_mois: {Bovins: 30, Ovins: 10, Caprins: 10}
+  age_jeune_mois: {Bovins: 6, Ovins: 4, Caprins: 4}
+  naissance_mensuelle_par_femelle: {Bovins: 0.031, Ovins: 0.046, Caprins: 0.048}
+  mortalite_mensuelle_base: {Bovins: 0.0040, Ovins: 0.0065, Caprins: 0.0065}
+  facteur_jeune: 2.5                 # surmortalité des jeunes
+  sortie_mensuelle_base: {Bovins: 0.0080, Ovins: 0.0180, Caprins: 0.0180}   # ventes et abattages
+  part_abattage_sorties: 0.30
+  achats_mensuels_par_tete: 0.0015
+  mois_tabaski: ["2023-06-01", "2024-06-01", "2025-06-01"]   # pic de ventes d'ovins et de caprins
+  facteur_tabaski: {Bovins: 1.5, Ovins: 3.0, Caprins: 3.0}
+  volailles:
+    part_chair_si_principale: 0.6
+    chair: {cycle_jours: [42, 56], pause_jours: [7, 21], mortalite_hebdo_base: 0.010}
+    ponte: {cycle_jours: 364, pause_jours: [7, 21], mortalite_hebdo_base: 0.003}
+    probabilite_epidemie_hebdo: 0.0015
+  defauts: {taux: 0.004}             # part de lignes volontairement erronées (voir fichier des défauts)
+
+vaccinations:
+  sortie: data/generated/vaccinations
+  part_retard_rattrape: 0.45         # part des doses manquées qui sont rattrapées en retard
+  part_autre_veterinaire: 0.10
+  participation_ferme: {"V_FA|Ovins": 0.3, "V_FA|Caprins": 0.3}
+  defauts: {taux: 0.003}

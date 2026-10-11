@@ -1,0 +1,70 @@
+# Paramètres des sources 7 à 10 (abattages, marché, alimentation, production)
+# Toutes ces valeurs sont des HYPOTHÈSES DE SIMULATION à documenter, à comparer si possible
+# avec des prix et rendements réels (par exemple le jeu WFP « Cameroon - Food Prices »).
+
+abattages:
+  sortie: data/generated/abattages
+  poids_adulte_kg:              # poids vif adulte moyen par espèce et par race
+    Bovins:   {Goudali: 330, Mbororo: 280, Wakwa: 350}
+    Ovins:    {Peul: 42, Djallonké: 26}
+    Caprins:  {Naine de Guinée: 22, Sahélienne: 32, Kirdi: 26}
+  tau_croissance_mois: {Bovins: 20, Ovins: 8, Caprins: 7}   # vitesse d'atteinte du poids adulte
+  rendement_carcasse: {Bovins: 0.50, Ovins: 0.46, Caprins: 0.44, Volailles: 0.70}
+  poids_poulet_par_jour_kg: 0.045     # gain moyen d'un poulet de chair par jour de cycle
+  part_lots_chair_abattus: 0.40       # le reste des lots de chair est vendu vivant au marché
+  taux_saisie: 0.03
+  defauts: {taux: 0.004}
+
+marche:
+  sortie: data/generated/marche
+  prix_base_kg_vif: {Bovins: 1250, Ovins: 1700, Caprins: 1400, Volailles: 1500}   # XAF par kg vif en 2023
+  facteur_poule_reforme: 0.6
+  inflation_annuelle: 0.03
+  amplitude_saison: 0.05
+  facteur_tabaski: {Ovins: 1.35, Caprins: 1.30}
+  prime_destination: {local: 1.0, "autre région": 1.12, export: 1.08}
+  part_marche_departement: 0.85       # vente sur le marché de son département, sinon autre marché de la région
+  destinations:                       # répartition des ventes par région (somme = 1)
+    Adamaoua:     {local: 0.40, "autre région": 0.45, export: 0.15}
+    Extrême-Nord: {local: 0.45, "autre région": 0.15, export: 0.40}
+    Ouest:        {local: 0.70, "autre région": 0.28, export: 0.02}
+  pays_export:
+    Adamaoua: [Nigeria, Gabon, Guinée équatoriale]
+    Extrême-Nord: [Nigeria, Tchad]
+    Ouest: [Nigeria]
+  villes_autre_region: [Yaoundé, Douala]
+  part_export_en_usd: 0.4             # part des ventes à l'export facturées en dollars
+  taille_marche_sigma: 0.35           # écart de taille entre marchés (relevés de prix)
+  defauts: {taux: 0.004}
+
+alimentation:
+  sortie: data/generated/alimentation
+  kg_tete_jour: {Bovins: 7.0, Ovins: 1.2, Caprins: 1.0}
+  part_achetee_fourrage: {Pastoral: 0.12, Transhumant: 0.05, Sédentaire: 0.45, Périurbain: 0.60}
+  sensibilite_ndvi: 0.10              # hausse de la part achetée quand les pâturages sont secs
+  concentre_kg_tete_jour: {Bovins: 0.5, Ovins: 0.10, Caprins: 0.10}
+  part_troupeau_concentre: 0.30
+  sel_kg_tete_semaine: {Bovins: 0.03, Ovins: 0.005, Caprins: 0.005}
+  kg_oiseau_jour: {demarrage: 0.03, croissance: 0.09, finition: 0.14, pondeuse: 0.115, local: 0.06}
+  prix_kg_xaf:
+    fourrage: 60
+    concentre: 190
+    sel: 400
+    demarrage: 380
+    croissance: 340
+    finition: 320
+    pondeuse: 300
+    local: 180
+  amplitude_saison_fourrage: 0.30     # hausse du prix en saison sèche
+  inflation_annuelle: 0.03
+  part_volaille_usd: 0.06             # aliment importé facturé en dollars
+  defauts: {taux: 0.004}
+
+production:
+  sortie: data/generated/production
+  part_vaches_laitieres: 0.45         # part des femelles reproductrices en lactation
+  rendement_litres: {Adamaoua: 1.8, Extrême-Nord: 1.3, Ouest: 2.8}   # litres par vache en lactation et par jour
+  sensibilite_ndvi: 0.12
+  sensibilite_chaleur: 0.25
+  ponte: {debut_semaine: 18, fin_semaine: 72, taux_max: 0.80, taux_fin: 0.55, facteur_poule_locale: 0.35}
+  defauts: {taux: 0.004}

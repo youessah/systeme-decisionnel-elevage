@@ -1,0 +1,16 @@
+n,source,format,origine,lignes
+1,FAOSTAT élevage,CSV,Public,40
+2,FAOSTAT prix producteurs,CSV,Public,4561
+3,WAHIS foyers de maladies,CSV,Public,340
+4,Cheptel par exploitation,PostgreSQL,Généré,47900
+5,Vaccinations,MySQL,Généré,151420
+6,Mouvements et transhumance,JSON,Généré,8159
+7,Abattages,CSV,Généré,2809
+8,Production de lait et d'œufs,Excel,Généré,136258
+9,Alimentation et fourrage,CSV,Généré,110437
+10,Prix du marché à bétail,CSV,Généré,10430
+11,Pâturages (NDVI),CSV,Public,59296
+12,Météo (Open-Meteo),API JSON,Public,157824
+13,Vétérinaires et interventions,XML,Généré,2414
+14,Colliers GPS,JSON,Généré,395947
+15,Taux de change,API JSON,Public,755

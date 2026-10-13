@@ -68,3 +68,52 @@ production:
   sensibilite_chaleur: 0.25
   ponte: {debut_semaine: 18, fin_semaine: 72, taux_max: 0.80, taux_fin: 0.55, facteur_poule_locale: 0.35}
   defauts: {taux: 0.004}
+
+# ---------------------------------------------------------------------------
+# Sources 6 (mouvements), 14 (colliers GPS) et 13 (vétérinaires)
+# ---------------------------------------------------------------------------
+mouvements:
+  sortie: data/generated/mouvements
+  transhumance:
+    fenetre_aller: ["11-15", "12-31"]       # départ en saison sèche (mois-jour)
+    fenetre_retour: ["05-15", "06-30"]      # retour avec les pluies
+    part_exploitations_qui_partent: 0.9     # chaque année
+    part_troupeau: [0.6, 0.9]
+    distance_mediane_km: {Adamaoua: 70, Extrême-Nord: 90}
+    distance_min_max_km: [20, 300]
+    vitesse_km_jour: 15
+    especes:                                # probabilité que l'espèce accompagne la transhumance
+      Adamaoua:     {Bovins: 1.0, Ovins: 0.2, Caprins: 0.2}
+      Extrême-Nord: {Bovins: 1.0, Ovins: 0.6, Caprins: 0.6}
+  villes:                                   # [latitude, longitude] approximatives des destinations de vente
+    Yaoundé: [3.848, 11.502]
+    Douala: [4.051, 9.768]
+    Nigeria: [9.203, 12.495]
+    Tchad: [12.135, 15.056]
+    Gabon: [0.416, 9.467]
+    Guinée équatoriale: [1.864, 9.766]
+  defauts: {taux: 0.004}
+
+gps:
+  sortie: data/generated/gps
+  annee: 2025                               # année couverte par les colliers
+  colliers: 300
+  exploitations_equipees: 60
+  positions_par_jour: 4                     # 00h, 06h, 12h, 18h
+  rayon_paturage_km: {Adamaoua: 3.0, Extrême-Nord: 5.0, Ouest: 1.5}
+  bruit_m: 10
+  perte_signal: 0.02                        # part de positions non reçues
+  immobilites_sans_deces: 20
+  vols: 10
+  pertes_longues: 10
+
+interventions:
+  sortie: data/generated/veterinaires
+  taux_episodes_sans_deces: 0.04            # épisodes sanitaires par exploitation et par mois, avant multiplicateur
+  seuil_mortalite_hebdo_lot: 0.06           # une semaine de mortalité supérieure déclenche une intervention sur un lot
+  part_cout_usd: 0.05                       # médicaments importés facturés en dollars
+  cout_medicament_par_animal: {Bovins: 3500, Ovins: 1000, Caprins: 1000, Volailles: 60}
+  honoraires_xaf: {Public: 8000, Privé: 18000}
+  texte: {part_negations: 0.25, part_fautes: 0.10, part_abreviations: 0.30}
+  echantillon_verification: 80
+  defauts: {taux: 0.004}

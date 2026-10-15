@@ -1,0 +1,198 @@
+data\generated\abattages\abattage.csv
+    colonnes : ['id_abattage', 'id_exploitation', 'id_animal', 'id_lot', 'espece', 'nb_animaux', 'date_abattage', 'poids_vif_kg', 'poids_carcasse_kg', 'abattoir', 'region', 'statut_inspection', 'updated_at']
+    types    : {'id_abattage': 'str', 'id_exploitation': 'str', 'id_animal': 'str', 'id_lot': 'float64', 'espece': 'str', 'nb_animaux': 'int64', 'date_abattage': 'str', 'poids_vif_kg': 'float64', 'poids_carcasse_kg': 'float64', 'abattoir': 'str', 'region': 'str', 'statut_inspection': 'str', 'updated_at': 'str'}
+data\generated\alimentation\alimentation.csv
+    colonnes : ['id_alimentation', 'date_semaine', 'id_exploitation', 'espece', 'id_lot', 'type_aliment', 'quantite_kg', 'prix_unitaire', 'devise', 'cout_total', 'updated_at']
+    types    : {'id_alimentation': 'str', 'date_semaine': 'str', 'id_exploitation': 'str', 'espece': 'str', 'id_lot': 'float64', 'type_aliment': 'str', 'quantite_kg': 'float64', 'prix_unitaire': 'float64', 'devise': 'str', 'cout_total': 'float64', 'updated_at': 'str'}
+data\generated\cheptel\animal.csv
+    colonnes : ['id_animal', 'id_exploitation', 'espece', 'race', 'sexe', 'date_naissance', 'type_entree', 'date_entree', 'date_sortie', 'motif_sortie', 'cause_deces', 'statut_reproducteur', 'updated_at']
+    types    : {'id_animal': 'str', 'id_exploitation': 'str', 'espece': 'str', 'race': 'str', 'sexe': 'str', 'date_naissance': 'str', 'type_entree': 'str', 'date_entree': 'str', 'date_sortie': 'str', 'motif_sortie': 'str', 'cause_deces': 'float64', 'statut_reproducteur': 'str', 'updated_at': 'str'}
+data\generated\cheptel\exploitation.csv
+    colonnes : ['id_exploitation', 'nom_exploitation', 'proprietaire', 'pcode_departement', 'departement', 'region', 'espece_principale', 'systeme_elevage', 'taille', 'date_creation', 'latitude', 'longitude', 'statut', 'updated_at']
+    types    : {'id_exploitation': 'str', 'nom_exploitation': 'str', 'proprietaire': 'str', 'pcode_departement': 'str', 'departement': 'str', 'region': 'str', 'espece_principale': 'str', 'systeme_elevage': 'str', 'taille': 'str', 'date_creation': 'str', 'latitude': 'float64', 'longitude': 'float64', 'statut': 'str', 'updated_at': 'str'}
+data\generated\cheptel\lot_volaille.csv
+    colonnes : ['id_lot', 'id_exploitation', 'espece', 'type_production', 'race', 'date_mise_en_place', 'effectif_initial', 'date_sortie', 'nb_morts_total', 'motif_sortie', 'updated_at']
+    types    : {'id_lot': 'str', 'id_exploitation': 'str', 'espece': 'str', 'type_production': 'str', 'race': 'str', 'date_mise_en_place': 'str', 'effectif_initial': 'int64', 'date_sortie': 'str', 'nb_morts_total': 'int64', 'motif_sortie': 'str', 'updated_at': 'str'}
+data\generated\cheptel\suivi_lot_semaine.csv
+    colonnes : ['id_suivi', 'id_lot', 'date_semaine', 'nb_morts', 'effectif_fin_semaine']
+    types    : {'id_suivi': 'int64', 'id_lot': 'str', 'date_semaine': 'str', 'nb_morts': 'int64', 'effectif_fin_semaine': 'int64'}
+data\generated\gps\colliers.json
+    structure : ['id_collier', 'id_animal', 'id_exploitation', 'espece', 'date_pose']
+data\generated\gps\gps_2025-01.json
+    structure : ['id_collier', 'id_animal', 'id_exploitation', 'horodatage', 'latitude', 'longitude', 'vitesse_kmh', 'batterie_pct']
+data\generated\marche\releve_prix.csv
+    colonnes : ['id_releve', 'semaine', 'id_marche', 'espece', 'prix_moyen_kg_vif', 'prix_min_kg_vif', 'prix_max_kg_vif', 'nb_presentes', 'devise']
+    types    : {'id_releve': 'str', 'semaine': 'str', 'id_marche': 'str', 'espece': 'str', 'prix_moyen_kg_vif': 'float64', 'prix_min_kg_vif': 'float64', 'prix_max_kg_vif': 'float64', 'nb_presentes': 'int64', 'devise': 'str'}
+data\generated\marche\vente.csv
+    colonnes : ['id_transaction', 'date_transaction', 'id_marche', 'marche', 'region', 'id_exploitation', 'id_animal', 'id_lot', 'espece', 'nb_tetes', 'poids_total_kg', 'prix_total', 'devise', 'destination_categorie', 'destination', 'updated_at']
+    types    : {'id_transaction': 'str', 'date_transaction': 'str', 'id_marche': 'str', 'marche': 'str', 'region': 'str', 'id_exploitation': 'str', 'id_animal': 'str', 'id_lot': 'float64', 'espece': 'str', 'nb_tetes': 'int64', 'poids_total_kg': 'float64', 'prix_total': 'float64', 'devise': 'str', 'destination_categorie': 'str', 'destination': 'str', 'updated_at': 'str'}
+data\generated\meteo_horaire_reference.csv
+    colonnes : ['pcode_departement', 'departement', 'horodatage', 'temperature_c', 'humidite_pct']
+    types    : {'pcode_departement': 'str', 'departement': 'str', 'horodatage': 'str', 'temperature_c': 'float64', 'humidite_pct': 'int64'}
+data\generated\mouvements\mouvements_2023.json
+    structure : ['id_mouvement', 'id_exploitation', 'espece', 'nb_tetes', 'type_mouvement', 'date_depart', 'date_arrivee', 'origine', 'destination', 'distance_km', 'id_transaction']
+data\generated\pilotes\abattage_propre.csv
+    colonnes : ['id_abattage', 'id_exploitation', 'id_animal', 'id_lot', 'espece', 'nb_animaux', 'date_abattage', 'poids_vif_kg', 'poids_carcasse_kg', 'abattoir', 'region', 'statut_inspection', 'updated_at']
+    types    : {'id_abattage': 'str', 'id_exploitation': 'str', 'id_animal': 'str', 'id_lot': 'float64', 'espece': 'str', 'nb_animaux': 'int64', 'date_abattage': 'str', 'poids_vif_kg': 'float64', 'poids_carcasse_kg': 'float64', 'abattoir': 'str', 'region': 'str', 'statut_inspection': 'str', 'updated_at': 'str'}
+data\generated\pilotes\affectation_veterinaire.csv
+    colonnes : ['id_exploitation', 'id_veterinaire', 'statut_veto', 'conformite_base', 'delai_base_h']
+    types    : {'id_exploitation': 'str', 'id_veterinaire': 'str', 'statut_veto': 'str', 'conformite_base': 'float64', 'delai_base_h': 'float64'}
+data\generated\pilotes\alimentation_propre.csv
+    colonnes : ['id_alimentation', 'date_semaine', 'id_exploitation', 'espece', 'id_lot', 'type_aliment', 'quantite_kg', 'prix_unitaire', 'devise', 'cout_total', 'updated_at']
+    types    : {'id_alimentation': 'str', 'date_semaine': 'str', 'id_exploitation': 'str', 'espece': 'str', 'id_lot': 'float64', 'type_aliment': 'str', 'quantite_kg': 'float64', 'prix_unitaire': 'float64', 'devise': 'str', 'cout_total': 'float64', 'updated_at': 'str'}
+data\generated\pilotes\animal_propre.csv
+    colonnes : ['id_animal', 'id_exploitation', 'espece', 'race', 'sexe', 'date_naissance', 'type_entree', 'date_entree', 'date_sortie', 'motif_sortie', 'cause_deces', 'statut_reproducteur', 'updated_at']
+    types    : {'id_animal': 'str', 'id_exploitation': 'str', 'espece': 'str', 'race': 'str', 'sexe': 'str', 'date_naissance': 'str', 'type_entree': 'str', 'date_entree': 'str', 'date_sortie': 'str', 'motif_sortie': 'str', 'cause_deces': 'float64', 'statut_reproducteur': 'str', 'updated_at': 'str'}
+data\generated\pilotes\defauts_abattages.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_alimentation.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_cheptel.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_marche.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_mouvements.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_production.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_vaccinations.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\defauts_veterinaires.csv
+    colonnes : ['table', 'identifiant', 'type_defaut']
+    types    : {'table': 'str', 'identifiant': 'str', 'type_defaut': 'str'}
+data\generated\pilotes\echantillon_a_verifier.csv
+    colonnes : ['id_intervention', 'maladie_reelle', 'symptomes_reels', 'symptomes_nies', 'compte_rendu']
+    types    : {'id_intervention': 'str', 'maladie_reelle': 'str', 'symptomes_reels': 'str', 'symptomes_nies': 'float64', 'compte_rendu': 'str'}
+data\generated\pilotes\gold_comptes_rendus.csv
+    colonnes : ['id_intervention', 'maladie_reelle', 'symptomes_reels', 'symptomes_nies', 'compte_rendu']
+    types    : {'id_intervention': 'str', 'maladie_reelle': 'str', 'symptomes_reels': 'str', 'symptomes_nies': 'str', 'compte_rendu': 'str'}
+data\generated\pilotes\gps_anomalies_verite.csv
+    colonnes : ['id_collier', 'id_animal', 'type_anomalie', 'debut', 'fin']
+    types    : {'id_collier': 'str', 'id_animal': 'str', 'type_anomalie': 'str', 'debut': 'str', 'fin': 'str'}
+data\generated\pilotes\intervention_propre.csv
+    colonnes : ['id_intervention', 'id_exploitation', 'id_veterinaire', 'espece', 'code_maladie', 'date_signalement', 'date_intervention', 'nb_malades', 'nb_traites', 'nb_deces', 'cout_medicaments', 'honoraires', 'devise', 'compte_rendu', 'origine']
+    types    : {'id_intervention': 'str', 'id_exploitation': 'str', 'id_veterinaire': 'str', 'espece': 'str', 'code_maladie': 'str', 'date_signalement': 'str', 'date_intervention': 'str', 'nb_malades': 'int64', 'nb_traites': 'int64', 'nb_deces': 'int64', 'cout_medicaments': 'float64', 'honoraires': 'float64', 'devise': 'str', 'compte_rendu': 'str', 'origine': 'str'}
+data\generated\pilotes\lot_propre.csv
+    colonnes : ['id_lot', 'id_exploitation', 'espece', 'type_production', 'race', 'date_mise_en_place', 'effectif_initial', 'date_sortie', 'nb_morts_total', 'motif_sortie', 'updated_at']
+    types    : {'id_lot': 'str', 'id_exploitation': 'str', 'espece': 'str', 'type_production': 'str', 'race': 'str', 'date_mise_en_place': 'str', 'effectif_initial': 'int64', 'date_sortie': 'str', 'nb_morts_total': 'int64', 'motif_sortie': 'str', 'updated_at': 'str'}
+data\generated\pilotes\mouvements_propre.csv
+    colonnes : ['id_mouvement', 'id_exploitation', 'espece', 'nb_tetes', 'type_mouvement', 'date_depart', 'date_arrivee', 'lieu_o', 'lat_o', 'lon_o', 'lieu_d', 'lat_d', 'lon_d', 'id_transaction', 'distance_km']
+    types    : {'id_mouvement': 'str', 'id_exploitation': 'str', 'espece': 'str', 'nb_tetes': 'int64', 'type_mouvement': 'str', 'date_depart': 'str', 'date_arrivee': 'str', 'lieu_o': 'str', 'lat_o': 'float64', 'lon_o': 'float64', 'lieu_d': 'str', 'lat_d': 'float64', 'lon_d': 'float64', 'id_transaction': 'str', 'distance_km': 'float64'}
+data\generated\pilotes\pilotes_exploitation_mois.csv
+    colonnes : ['id_exploitation', 'mois', 'pcode_departement', 'region', 'id_veterinaire', 'systeme_elevage', 'jours_stress', 'jours_stress_severe', 'thi_max_moyen', 'ndvi', 'ndvi_z', 'foyers_mois', 'pression_z', 'origine', 'conformite_vaccinale', 'delai_veto_h', 'effet_exploitation', 'risque_latent', 'multiplicateur_mortalite']
+    types    : {'id_exploitation': 'str', 'mois': 'str', 'pcode_departement': 'str', 'region': 'str', 'id_veterinaire': 'str', 'systeme_elevage': 'str', 'jours_stress': 'int64', 'jours_stress_severe': 'int64', 'thi_max_moyen': 'float64', 'ndvi': 'float64', 'ndvi_z': 'float64', 'foyers_mois': 'float64', 'pression_z': 'float64', 'origine': 'str', 'conformite_vaccinale': 'float64', 'delai_veto_h': 'float64', 'effet_exploitation': 'float64', 'risque_latent': 'float64', 'multiplicateur_mortalite': 'float64'}
+data\generated\pilotes\pression_foyers_semestre.csv
+    colonnes : ['region', 'annee', 'moitie', 'foyers_semestre', 'origine']
+    types    : {'region': 'str', 'annee': 'int64', 'moitie': 'int64', 'foyers_semestre': 'float64', 'origine': 'str'}
+data\generated\pilotes\production_propre.csv
+    colonnes : ['date', 'id_exploitation', 'litres_lait', 'nb_vaches_lactation', 'nb_oeufs', 'nb_pondeuses']
+    types    : {'date': 'str', 'id_exploitation': 'str', 'litres_lait': 'float64', 'nb_vaches_lactation': 'float64', 'nb_oeufs': 'float64', 'nb_pondeuses': 'float64'}
+data\generated\pilotes\vaccination_propre.csv
+    colonnes : ['id_vaccination', 'id_exploitation', 'id_animal', 'id_lot', 'espece', 'code_vaccin', 'vaccin', 'maladie_ciblee', 'numero_dose', 'date_vaccination', 'date_rappel_prevue', 'date_rappel_realisee', 'id_veterinaire', 'nb_animaux_vaccines', 'updated_at']
+    types    : {'id_vaccination': 'str', 'id_exploitation': 'str', 'id_animal': 'str', 'id_lot': 'float64', 'espece': 'str', 'code_vaccin': 'str', 'vaccin': 'str', 'maladie_ciblee': 'str', 'numero_dose': 'int64', 'date_vaccination': 'str', 'date_rappel_prevue': 'str', 'date_rappel_realisee': 'str', 'id_veterinaire': 'str', 'nb_animaux_vaccines': 'int64', 'updated_at': 'str'}
+data\generated\pilotes\vente_propre.csv
+    colonnes : ['id_transaction', 'date_transaction', 'id_marche', 'marche', 'region', 'id_exploitation', 'id_animal', 'id_lot', 'espece', 'nb_tetes', 'poids_total_kg', 'prix_total', 'devise', 'destination_categorie', 'destination', 'updated_at']
+    types    : {'id_transaction': 'str', 'date_transaction': 'str', 'id_marche': 'str', 'marche': 'str', 'region': 'str', 'id_exploitation': 'str', 'id_animal': 'str', 'id_lot': 'float64', 'espece': 'str', 'nb_tetes': 'int64', 'poids_total_kg': 'float64', 'prix_total': 'float64', 'devise': 'str', 'destination_categorie': 'str', 'destination': 'str', 'updated_at': 'str'}
+data\generated\production\production_lait_oeufs.xlsx [feuille Production_2023]
+    colonnes : ['date', 'id_exploitation', 'litres_lait', 'nb_vaches_lactation', 'nb_oeufs', 'nb_pondeuses']
+data\generated\production\production_lait_oeufs.xlsx [feuille Production_2024]
+    colonnes : ['date', 'id_exploitation', 'litres_lait', 'nb_vaches_lactation', 'nb_oeufs', 'nb_pondeuses']
+data\generated\production\production_lait_oeufs.xlsx [feuille Production_2025]
+    colonnes : ['date', 'id_exploitation', 'litres_lait', 'nb_vaches_lactation', 'nb_oeufs', 'nb_pondeuses']
+data\generated\ref_departements.csv
+    colonnes : ['departement', 'pcode_dep', 'region', 'pcode_region', 'center_lat', 'center_lon']
+    types    : {'departement': 'str', 'pcode_dep': 'str', 'region': 'str', 'pcode_region': 'str', 'center_lat': 'float64', 'center_lon': 'float64'}
+data\generated\referentiel\ref_destinations.csv
+    colonnes : ['id_destination', 'destination', 'categorie']
+    types    : {'id_destination': 'str', 'destination': 'str', 'categorie': 'str'}
+data\generated\referentiel\ref_especes.csv
+    colonnes : ['code_espece', 'espece', 'groupe', 'production_principale']
+    types    : {'code_espece': 'str', 'espece': 'str', 'groupe': 'str', 'production_principale': 'str'}
+data\generated\referentiel\ref_exploitation_especes.csv
+    colonnes : ['id_exploitation', 'espece', 'effectif_initial']
+    types    : {'id_exploitation': 'str', 'espece': 'str', 'effectif_initial': 'int64'}
+data\generated\referentiel\ref_exploitations.csv
+    colonnes : ['id_exploitation', 'nom_exploitation', 'proprietaire', 'pcode_departement', 'departement', 'region', 'espece_principale', 'systeme_elevage', 'taille', 'date_creation', 'latitude', 'longitude', 'statut']
+    types    : {'id_exploitation': 'str', 'nom_exploitation': 'str', 'proprietaire': 'str', 'pcode_departement': 'str', 'departement': 'str', 'region': 'str', 'espece_principale': 'str', 'systeme_elevage': 'str', 'taille': 'str', 'date_creation': 'str', 'latitude': 'float64', 'longitude': 'float64', 'statut': 'str'}
+data\generated\referentiel\ref_lieux.csv
+    colonnes : ['id_lieu', 'departement', 'pcode_departement', 'region', 'pcode_region', 'chef_lieu', 'latitude', 'longitude']
+    types    : {'id_lieu': 'str', 'departement': 'str', 'pcode_departement': 'str', 'region': 'str', 'pcode_region': 'str', 'chef_lieu': 'str', 'latitude': 'float64', 'longitude': 'float64'}
+data\generated\referentiel\ref_maladies.csv
+    colonnes : ['code_maladie', 'maladie', 'sigle', 'categorie', 'especes_concernees', 'mot_cle_wahis']
+    types    : {'code_maladie': 'str', 'maladie': 'str', 'sigle': 'str', 'categorie': 'str', 'especes_concernees': 'str', 'mot_cle_wahis': 'str'}
+data\generated\referentiel\ref_marches.csv
+    colonnes : ['id_marche', 'nom_marche', 'ville', 'pcode_departement', 'departement', 'region', 'latitude', 'longitude']
+    types    : {'id_marche': 'str', 'nom_marche': 'str', 'ville': 'str', 'pcode_departement': 'str', 'departement': 'str', 'region': 'str', 'latitude': 'float64', 'longitude': 'float64'}
+data\generated\referentiel\ref_races.csv
+    colonnes : ['code_race', 'espece', 'race']
+    types    : {'code_race': 'str', 'espece': 'str', 'race': 'str'}
+data\generated\referentiel\ref_vaccins.csv
+    colonnes : ['code_vaccin', 'vaccin', 'code_maladie', 'especes_cibles', 'rappel_jours']
+    types    : {'code_vaccin': 'str', 'vaccin': 'str', 'code_maladie': 'str', 'especes_cibles': 'str', 'rappel_jours': 'float64'}
+data\generated\referentiel\ref_veterinaires.csv
+    colonnes : ['id_veterinaire', 'nom', 'prenom', 'statut', 'pcode_departement', 'departement', 'specialite', 'date_prise_poste']
+    types    : {'id_veterinaire': 'str', 'nom': 'str', 'prenom': 'str', 'statut': 'str', 'pcode_departement': 'str', 'departement': 'str', 'specialite': 'str', 'date_prise_poste': 'str'}
+data\generated\vaccinations\vaccin.csv
+    colonnes : ['code_vaccin', 'vaccin', 'code_maladie', 'especes_cibles', 'rappel_jours', 'maladie']
+    types    : {'code_vaccin': 'str', 'vaccin': 'str', 'code_maladie': 'str', 'especes_cibles': 'str', 'rappel_jours': 'float64', 'maladie': 'str'}
+data\generated\vaccinations\vaccination.csv
+    colonnes : ['id_vaccination', 'id_exploitation', 'id_animal', 'id_lot', 'espece', 'code_vaccin', 'vaccin', 'maladie_ciblee', 'numero_dose', 'date_vaccination', 'date_rappel_prevue', 'date_rappel_realisee', 'id_veterinaire', 'nb_animaux_vaccines', 'updated_at']
+    types    : {'id_vaccination': 'str', 'id_exploitation': 'str', 'id_animal': 'str', 'id_lot': 'float64', 'espece': 'str', 'code_vaccin': 'str', 'vaccin': 'str', 'maladie_ciblee': 'str', 'numero_dose': 'int64', 'date_vaccination': 'str', 'date_rappel_prevue': 'str', 'date_rappel_realisee': 'str', 'id_veterinaire': 'str', 'nb_animaux_vaccines': 'int64', 'updated_at': 'str'}
+data\generated\veterinaires\veterinaires_interventions.xml
+    racine : reseau_veterinaire
+    <veterinaires> contient <veterinaire> attributs=['id'] balises=['nom', 'prenom', 'statut', 'specialite', 'date_prise_poste', 'departement']
+    <interventions> contient <intervention> attributs=['id'] balises=['exploitation', 'veterinaire', 'espece', 'maladie', 'date_signalement', 'date_intervention', 'nb_animaux_malades', 'nb_animaux_traites', 'nb_deces', 'cout_medicaments', 'honoraires', 'compte_rendu']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin0]
+    colonnes : ['iso2', 'iso3', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'version', 'area_sqkm', 'lang', 'lang1', 'lang2', 'lang3', 'adm0_ref_name1', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin0_em]
+    colonnes : ['iso2', 'iso3', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin1]
+    colonnes : ['adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'adm1_ref_name1', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin1_em]
+    colonnes : ['adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin2]
+    colonnes : ['adm2_name', 'adm2_name1', 'adm2_name2', 'adm2_name3', 'adm2_pcode', 'adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'adm2_ref_name1', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin2_em]
+    colonnes : ['adm2_name', 'adm2_name1', 'adm2_name2', 'adm2_name3', 'adm2_pcode', 'adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'adm1_en', 'adm0_en', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin3]
+    colonnes : ['adm3_name', 'adm3_name1', 'adm3_name2', 'adm3_name3', 'adm3_pcode', 'adm2_name', 'adm2_name1', 'adm2_name2', 'adm2_name3', 'adm2_pcode', 'adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'adm3_ref_name1', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admin3_em]
+    colonnes : ['adm3_name', 'adm3_name1', 'adm3_name2', 'adm3_name3', 'adm3_pcode', 'adm2_name', 'adm2_name1', 'adm2_name2', 'adm2_name3', 'adm2_pcode', 'adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'area_sqkm', 'version', 'lang', 'lang1', 'lang2', 'lang3', 'adm1_en', 'adm0_en', 'center_lat', 'center_lon']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_admincapitals]
+    colonnes : ['adm_p_lvl', 'name', 'name_1', 'name_2', 'name_3', 'loc_pcode', 'x_coord', 'y_coord', 'adm3_name', 'adm3_name1', 'adm3_name2', 'adm3_name3', 'adm3_pcode', 'adm2_name', 'adm2_name1', 'adm2_name2', 'adm2_name3', 'adm2_pcode', 'adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'version', 'name_lng', 'name_lng1', 'name_lng2', 'name_lng3']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_adminlines]
+    colonnes : ['adm_level', 'name', 'valid_on', 'valid_to', 'version', 'right_pcod', 'left_pcod']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_adminlines_em]
+    colonnes : ['adm_level', 'name', 'valid_on', 'valid_to', 'version', 'right_pcod', 'left_pcod']
+data\raw\cmr_admin_codes.xlsx [feuille cmr_adminpoints]
+    colonnes : ['admin_level', 'name', 'name1', 'name2', 'name3', 'x_coord', 'y_coord', 'adm4_name', 'adm4_name1', 'adm4_name2', 'adm4_name3', 'adm4_pcode', 'adm3_name', 'adm3_name1', 'adm3_name2', 'adm3_name3', 'adm3_pcode', 'adm2_name', 'adm2_name1', 'adm2_name2', 'adm2_name3', 'adm2_pcode', 'adm1_name', 'adm1_name1', 'adm1_name2', 'adm1_name3', 'adm1_pcode', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'version', 'lang', 'lang1', 'lang2', 'lang3']
+data\raw\faostat_change_cameroun.csv
+    colonnes : ['Iso3', 'StartDate', 'EndDate', 'Area Code', 'Area Code (M49)', 'Area', 'Element Code', 'Element', 'ISO Currency Code', 'Currency', 'Year Code', 'Year', 'Months Code', 'Months', 'Unit', 'Value', 'Flag']
+    types    : {'Iso3': 'str', 'StartDate': 'str', 'EndDate': 'str', 'Area Code': 'int64', 'Area Code (M49)': 'str', 'Area': 'str', 'Element Code': 'str', 'Element': 'str', 'ISO Currency Code': 'str', 'Currency': 'str', 'Year Code': 'int64', 'Year': 'int64', 'Months Code': 'int64', 'Months': 'str', 'Unit': 'float64', 'Value': 'float64', 'Flag': 'str'}
+data\raw\faostat_elevage_cameroun.csv
+    colonnes : ['Code Domaine', 'Domaine', 'Code zone (M49)', 'Zone', 'Code Élément', 'Élément', 'Code Produit (CPC)', 'Produit', 'Code année', 'Année', 'Unité', 'Valeur', 'Symbole', 'Description du Symbole', 'Note']
+    types    : {'Code Domaine': 'str', 'Domaine': 'str', 'Code zone (M49)': 'int64', 'Zone': 'str', 'Code Élément': 'int64', 'Élément': 'str', 'Code Produit (CPC)': 'int64', 'Produit': 'str', 'Code année': 'int64', 'Année': 'int64', 'Unité': 'str', 'Valeur': 'int64', 'Symbole': 'str', 'Description du Symbole': 'str', 'Note': 'float64'}
+data\raw\faostat_prix_cameroun.csv
+    colonnes : ['Iso3', 'StartDate', 'EndDate', 'Area Code', 'Area Code (M49)', 'Area', 'Item Code', 'Item Code (CPC)', 'Item', 'Element Code', 'Element', 'Year Code', 'Year', 'Months Code', 'Months', 'Unit', 'Value', 'Flag']
+    types    : {'Iso3': 'str', 'StartDate': 'str', 'EndDate': 'str', 'Area Code': 'int64', 'Area Code (M49)': 'str', 'Area': 'str', 'Item Code': 'int64', 'Item Code (CPC)': 'str', 'Item': 'str', 'Element Code': 'int64', 'Element': 'str', 'Year Code': 'int64', 'Year': 'int64', 'Months Code': 'int64', 'Months': 'str', 'Unit': 'float64', 'Value': 'float64', 'Flag': 'str'}
+data\raw\meteo\CM001004_2023.json
+    structure : ['latitude', 'longitude', 'generationtime_ms', 'utc_offset_seconds', 'timezone', 'timezone_abbreviation', 'elevation', 'hourly_units', 'hourly']
+data\raw\ndvi_cmr_full.csv
+    colonnes : ['date', 'adm_level', 'adm_id', 'PCODE', 'n_pixels', 'vim', 'vim_avg', 'viq']
+    types    : {'date': 'str', 'adm_level': 'int64', 'adm_id': 'int64', 'PCODE': 'str', 'n_pixels': 'float64', 'vim': 'float64', 'vim_avg': 'float64', 'viq': 'float64'}
+data\raw\wahis_quantitatif_2026-10-05.csv
+    colonnes : ['Année', 'Semestre', 'Région mondiale', 'Pays', 'Division administrative', 'Maladie', 'Génotype/sérotype/sous-type', 'Catégorie animale', 'Event_id', 'Espèce', 'Outbreak_id', 'Nouveaux foyers', 'Sensibles', 'Unités de mesure', 'Cas', 'Mis à mort et éliminés', 'Abattus/mis a mort à des fins commerciales', 'Morts', 'Vaccinés']
+    types    : {'Année': 'int64', 'Semestre': 'str', 'Région mondiale': 'str', 'Pays': 'str', 'Division administrative': 'str', 'Maladie': 'str', 'Génotype/sérotype/sous-type': 'str', 'Catégorie animale': 'str', 'Event_id': 'str', 'Espèce': 'str', 'Outbreak_id': 'str', 'Nouveaux foyers': 'str', 'Sensibles': 'str', 'Unités de mesure': 'str', 'Cas': 'str', 'Mis à mort et éliminés': 'str', 'Abattus/mis a mort à des fins commerciales': 'str', 'Morts': 'str', 'Vaccinés': 'str'}
+data\raw\wahis_quantitatif_cameroun.csv
+    colonnes : ['Année', 'Semestre', 'Région mondiale', 'Pays', 'Division administrative', 'Maladie', 'Génotype/sérotype/sous-type', 'Catégorie animale', 'Event_id', 'Espèce', 'Outbreak_id', 'Nouveaux foyers', 'Sensibles', 'Unités de mesure', 'Cas', 'Mis à mort et éliminés', 'Abattus/mis a mort à des fins commerciales', 'Morts', 'Vaccinés']
+    types    : {'Année': 'int64', 'Semestre': 'str', 'Région mondiale': 'str', 'Pays': 'str', 'Division administrative': 'str', 'Maladie': 'str', 'Génotype/sérotype/sous-type': 'float64', 'Catégorie animale': 'str', 'Event_id': 'str', 'Espèce': 'str', 'Outbreak_id': 'str', 'Nouveaux foyers': 'str', 'Sensibles': 'str', 'Unités de mesure': 'str', 'Cas': 'str', 'Mis à mort et éliminés': 'str', 'Abattus/mis a mort à des fins commerciales': 'str', 'Morts': 'str', 'Vaccinés': 'str'}
+data\raw\wahis_quantitatif_complet.csv
+    colonnes : ['Année', 'Semestre', 'Région mondiale', 'Pays', 'Division administrative', 'Maladie', 'Génotype/sérotype/sous-type', 'Catégorie animale', 'Event_id', 'Espèce', 'Outbreak_id', 'Nouveaux foyers', 'Sensibles', 'Unités de mesure', 'Cas', 'Mis à mort et éliminés', 'Abattus/mis a mort à des fins commerciales', 'Morts', 'Vaccinés']
+    types    : {'Année': 'int64', 'Semestre': 'str', 'Région mondiale': 'str', 'Pays': 'str', 'Division administrative': 'str', 'Maladie': 'str', 'Génotype/sérotype/sous-type': 'float64', 'Catégorie animale': 'str', 'Event_id': 'str', 'Espèce': 'str', 'Outbreak_id': 'str', 'Nouveaux foyers': 'str', 'Sensibles': 'str', 'Unités de mesure': 'str', 'Cas': 'str', 'Mis à mort et éliminés': 'str', 'Abattus/mis a mort à des fins commerciales': 'str', 'Morts': 'str', 'Vaccinés': 'str'}

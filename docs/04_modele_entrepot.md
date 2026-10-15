@@ -42,20 +42,22 @@ Table d'appui : `ref_taux_change` (mois × devise), alimentée par la source 15.
 10. **Staging en texte brut** : toutes les colonnes de `staging` sont en `TEXT`. Le typage et les contrôles se font à la transformation, pour journaliser chaque rejet (type, format, plage) dans `audit.etl_reject`.
 11. **Résultats ML/NLP** dans le schéma `ml`. Le NLP 2 résume les comptes rendus vétérinaires par région, WAHIS (quantitatif, sans texte) en complément.
 
-## 3. Points tranchés grâce à l'inventaire des colonnes
+## 3. Points tranchés grâce à l'inventaire des colonnes et aux vérifications
 
 | Point | Résultat |
 |---|---|
 | Destination des ventes (indicateur 20) | Dans `vente.csv` (`destination_categorie`, `destination`). `abattage.csv` n'en a pas : champ retiré de `fact_abattage`. |
+| Règle « export » | `ref_destinations.csv` : catégories `local`, `autre région`, `export`. Sont exportés : Nigeria, Tchad, Gabon, Guinée équatoriale. Règle : `est_export = (destination_categorie = 'export')`. |
 | Sexe et statut reproducteur (indicateur 9) | Présents dans `animal.csv`. |
 | Dates de rappel (indicateur 15) | `numero_dose`, `date_rappel_prevue` et `date_rappel_realisee` présents dans `vaccination.csv`. |
+| `poids_vif_kg` des abattages (indicateur 10) | **Total de la ligne**, pas poids par animal (ex. 584 animaux → 1 226 kg, soit environ 2 kg chacun : des volailles). Formule : Σ `poids_vif_kg` ÷ Σ `nb_animaux`, **à ventiler par espèce** : un poulet de 2 kg et un bovin de plusieurs centaines de kg rendent la moyenne globale sans sens. |
+| Niveau de WAHIS | **Région** (`Nord`, `Ouest`, `Extrême-Nord`). Les foyers se rattachent aux lignes `niveau = 'region'` de `dim_lieu`. |
 
 ## 4. Points encore ouverts
 
 | Point | Comment le vérifier | Impact |
 |---|---|---|
-| Valeurs de `destination_categorie` (laquelle signifie « export » ?) | `ref_destinations.csv` | Règle `est_export` |
-| `poids_vif_kg` d'`abattage.csv` : total de la ligne ou poids par animal ? | Comparer sur des lignes avec `nb_animaux > 1` | Formule de l'indicateur 10 |
-| Niveau de la colonne `Division administrative` de WAHIS (région ou département) | `generators/inspect_wahis.py` | Rattachement à `dim_lieu` |
-| Les lieux d'origine et de destination des mouvements (`origine`, `destination`) existent-ils dans `ref_lieux` ? | Comparer les libellés | Sinon `lieu_*_sk = -1` et le libellé est conservé |
+| Couverture de WAHIS : seulement 3 régions (Nord, Ouest, Extrême-Nord) dans le fichier | À mentionner dans le dossier | L'indicateur 11 et le NLP 2 ne couvrent que ces régions ; les autres sont vides, pas à zéro |
+| Sens de la colonne `origine` (WAHIS et `pression_foyers_semestre.csv`) | `generators/inspect_wahis.py` | Clé de `fact_foyer_maladie` |
+| Les libellés `origine` et `destination` des mouvements existent-ils dans `ref_lieux` ? | Comparer les libellés | Sinon `lieu_*_sk = -1` et le libellé est conservé |
 | Espèce rattachée au lait (`nb_vaches_lactation`) | Règle de gestion | Hypothèse retenue : Bovins pour le lait, Volailles pour les œufs |

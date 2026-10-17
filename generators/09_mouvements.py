@@ -98,11 +98,12 @@ def main():
 
     # ------------------------------------------------------------------ achats (un mouvement par animal acheté)
     ach = ani[(ani["type_entree"] == "achat") & (ani["date_entree"] >= pd.Timestamp(cfg["projet"]["periode"]["debut"]))]
-    for r in ach.itertuples():
+    ach = ach.groupby(["id_exploitation", "espece", "date_entree"], as_index=False).size().rename(columns={"size": "n"})
+    for r in ach.itertuples():  # un mouvement par exploitation, espèce et jour : n têtes achetées ensemble
         f = fx.loc[r.id_exploitation]
         m = marche_dep.loc[f["pcode_departement"]]
         arrivee = jour(r.date_entree)
-        lignes.append(dict(id_exploitation=r.id_exploitation, espece=r.espece, nb_tetes=1, type_mouvement="achat",
+        lignes.append(dict(id_exploitation=r.id_exploitation, espece=r.espece, nb_tetes=int(r.n), type_mouvement="achat",
                            date_depart=arrivee, date_arrivee=arrivee, lieu_o=m["nom_marche"], lat_o=m["latitude"], lon_o=m["longitude"],
                            lieu_d="Exploitation " + r.id_exploitation, lat_d=f["latitude"], lon_d=f["longitude"], id_transaction=None))
 

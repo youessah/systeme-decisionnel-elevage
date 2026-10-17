@@ -195,7 +195,7 @@ def main():
     obs10.loc[i, "poids_total_kg"] = 0
     et10 += [("vente", x, "poids_nul") for x in obs10.loc[i, "id_transaction"]]
     i = choisir(obs10, m_cfg["defauts"]["taux"])
-    obs10.loc[i, "date_transaction"] = obs10.loc[i, "date_transaction"] + pd.Timedelta(days=730)
+    obs10.loc[i, "date_transaction"] = pd.Timestamp(cfg["projet"]["periode"]["fin"]) + pd.to_timedelta(rng.integers(30, 400, len(i)), unit="D")
     et10 += [("vente", x, "date_future") for x in obs10.loc[i, "id_transaction"]]
     i = choisir(obs10, m_cfg["defauts"]["taux"])
     dup = obs10.loc[i].copy()

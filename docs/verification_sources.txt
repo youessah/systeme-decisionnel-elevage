@@ -1,0 +1,70 @@
+========================================================================
+1. INTÉGRITÉ RÉFÉRENTIELLE (valeurs utilisées absentes de la source de référence)
+========================================================================
+  OK  animal.id_exploitation                35 292 valeurs  0 absente(s)
+  OK  lot_volaille.id_exploitation             725 valeurs  0 absente(s)
+  OK  suivi_lot_semaine.id_lot              11 683 valeurs  0 absente(s)
+  OK  vaccination.id_exploitation          151 413 valeurs  0 absente(s)
+  OK  vaccination.id_animal                149 393 valeurs  0 absente(s)
+  OK  vaccination.id_lot                     2 020 valeurs  0 absente(s)
+  OK  vaccination.id_veterinaire           151 262 valeurs  0 absente(s)
+  OK  abattage.id_exploitation               2 809 valeurs  0 absente(s)
+  OK  abattage.id_animal                     2 618 valeurs  0 absente(s)
+  OK  abattage.id_lot                          191 valeurs  0 absente(s)
+  OK  vente.id_exploitation                  6 662 valeurs  0 absente(s)
+  OK  vente.id_animal                        6 216 valeurs  0 absente(s)
+  OK  vente.id_lot                             446 valeurs  0 absente(s)
+  OK  vente.id_marche                        6 662 valeurs  0 absente(s)
+  OK  alimentation.id_exploitation         110 437 valeurs  0 absente(s)
+  OK  alimentation.id_lot                   11 683 valeurs  0 absente(s)
+  OK  production.id_exploitation           136 258 valeurs  0 absente(s)
+  OK  mouvement.id_exploitation              8 152 valeurs  0 absente(s)
+  OK  mouvement.id_transaction               6 661 valeurs  0 absente(s)
+  OK  gps.id_exploitation                  395 947 valeurs  0 absente(s)
+  OK  gps.id_animal                        395 947 valeurs  0 absente(s)
+  OK  intervention.exploitation              2 390 valeurs  0 absente(s)
+  OK  intervention.veterinaire               2 390 valeurs  0 absente(s)
+  OK  exploitation.pcode_departement           200 valeurs  0 absente(s)
+  OK  veterinaire.departement                   24 valeurs  0 absente(s)
+
+========================================================================
+2. COHÉRENCE MÉTIER ENTRE SOURCES
+========================================================================
+  Animaux « vendus » (cheptel) absents du marché : 0
+  Animaux du marché non « vendus » dans le cheptel : 0
+  Animaux « abattus » (cheptel) absents des abattages : 0
+  Mouvements de vente / transactions du marché (hors doublons) : 6654 / 6654
+  Positions GPS postérieures à la sortie de l'animal : 743
+  Lots de volailles utilisés par l'alimentation sans suivi hebdomadaire : 0
+
+========================================================================
+3. DÉFAUTS DE QUALITÉ : observés par règle / injectés (étiquettes)
+========================================================================
+  Règle                                             observé  injecté   lecture
+  animal : date de sortie avant l'entrée                 47       47   égal
+  animal : sexe manquant                                 47       47   égal
+  animal : espèce mal écrite                             47       47   égal
+  vaccination : date dans le futur                      151      151   égal
+  vaccination : vétérinaire manquant                    151      151   égal
+  vaccination : doublons                                151      151   égal
+  abattage : poids vif négatif                            3        3   égal
+  abattage : date absente                                 3        3   égal
+  marché : prix négatif                                   8        8   égal
+  marché : poids nul                                      8        8   égal
+  marché : date dans le futur                             8        8   égal
+  marché : doublons                                       8        8   égal
+  alimentation : quantité négative                      147      147   égal
+  alimentation : prix manquant                          147      147   égal
+  production Excel : date saisie en texte               136      136   égal
+  production Excel : litres en texte (virgule)          136      136   égal
+  production Excel : litres négatifs                    136      136   égal
+  mouvement : distance négative                           8        8   égal
+  mouvement : doublons                                    8        8   égal
+  intervention : date d'intervention absente              3        3   égal
+  intervention : intervention avant signalement           3        3   égal
+  intervention : compte rendu vide                        3        3   égal
+  intervention : doublons                                 3        3   égal
+
+========================================================================
+BILAN : 25 contrôles d'intégrité sur 25 réussis.
+Les défauts du paragraphe 3 sont voulus : ton ETL doit les détecter et les écarter (table de rejets).

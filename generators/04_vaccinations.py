@@ -199,7 +199,7 @@ def main():
     k = max(3, int(len(obs) * v["defauts"]["taux"] / 3))
     etiq = []
     i1 = rng.choice(obs.index, k, replace=False)
-    obs.loc[i1, "date_vaccination"] = obs.loc[i1, "date_vaccination"] + pd.Timedelta(days=730)
+    obs.loc[i1, "date_vaccination"] = pd.Timestamp(cfg["projet"]["periode"]["fin"]) + pd.to_timedelta(rng.integers(30, 400, k), unit="D")
     etiq += [("vaccination", x, "date_future") for x in obs.loc[i1, "id_vaccination"]]
     i2 = rng.choice(obs.index, k, replace=False)
     obs.loc[i2, "id_veterinaire"] = None

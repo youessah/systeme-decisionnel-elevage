@@ -34,7 +34,8 @@
   Animaux du marché non « vendus » dans le cheptel : 0
   Animaux « abattus » (cheptel) absents des abattages : 0
   Mouvements de vente / transactions du marché (hors doublons) : 6654 / 6654
-  Positions GPS postérieures à la sortie de l'animal : 743
+  Positions GPS postérieures à la sortie réelle de l'animal : 0 (doit valoir 0)
+  Positions GPS postérieures à la date de sortie OBSERVÉE : 743, dont 1 animal(aux) dont la date de sortie a été altérée par un défaut injecté ['ANI-026901']
   Lots de volailles utilisés par l'alimentation sans suivi hebdomadaire : 0
 
 ========================================================================

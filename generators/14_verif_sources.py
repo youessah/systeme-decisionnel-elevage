@@ -118,10 +118,15 @@ def main():
     mouv_u = mouv[~mouv.drop(columns=["id_mouvement"]).astype(str).duplicated()]  # sans les doublons injectés
     vente_u = vente.drop_duplicates(subset=[c for c in vente.columns if c not in ("id_transaction", "updated_at")])
     sortie(f"  Mouvements de vente / transactions du marché (hors doublons) : {int((mouv_u['type_mouvement'] == 'vente').sum())} / {len(vente_u)}")
-    sortie_animal = ani.set_index("id_animal")["date_sortie"]
     gps["horodatage"] = pd.to_datetime(gps["horodatage"])
-    tard = gps[gps["horodatage"].dt.normalize() > gps["id_animal"].map(sortie_animal)]
-    sortie(f"  Positions GPS postérieures à la sortie de l'animal : {len(tard)}")
+    jour_gps = gps["horodatage"].dt.normalize()
+    vraie = pd.read_csv(ver / "animal_propre.csv", parse_dates=["date_sortie"]).set_index("id_animal")["date_sortie"]
+    tard_vrai = gps[jour_gps > gps["id_animal"].map(vraie)]
+    tard_obs = gps[jour_gps > gps["id_animal"].map(ani.set_index("id_animal")["date_sortie"])]
+    alteres = sorted(set(tard_obs["id_animal"]) - set(tard_vrai["id_animal"]))
+    sortie(f"  Positions GPS postérieures à la sortie réelle de l'animal : {len(tard_vrai)} (doit valoir 0)")
+    sortie(f"  Positions GPS postérieures à la date de sortie OBSERVÉE : {len(tard_obs)}, "
+           f"dont {len(alteres)} animal(aux) dont la date de sortie a été altérée par un défaut injecté {alteres[:5]}")
     sortie(f"  Lots de volailles utilisés par l'alimentation sans suivi hebdomadaire : {len(set(ali['id_lot'].dropna()) - set(suivi['id_lot']))}")
 
     # ------------------------------------------------------------------ 3. défauts : observés / injectés

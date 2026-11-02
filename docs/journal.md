@@ -33,3 +33,4 @@ Filtres : Cameroun, Adamaoua + Extrême-Nord + Ouest, 7 maladies, espèces rumin
 2023 : sensibles 1 073, cas 625, morts 36 (S1 : 626 / 441 / 15 ; S2 : 447 / 184 / 21).
 Structure de l'export : outbreak_id vide = rapport semestriel ; rempli = notification immédiate ou rapport de suivi. « Nouveaux foyers » = foyers débutés pendant le semestre. Ils sont portés par des lignes dont l'espèce est vide, donc un filtre d'espèce les supprime. Un foyer touchant plusieurs espèces n'est compté qu'une fois.
 Export téléchargé : Données quantitatives 2026-10-06.csv, 6 365 octets
+- Verification croisee des 15 sources (generators/14_verif_sources.py) : 25 controles d'integrite reussis. Correction de 3 generateurs de defauts (dates futures reellement posterieures a la periode, achats du meme jour regroupes). Rapport : docs/verification_sources.txt.

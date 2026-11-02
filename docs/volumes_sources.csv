@@ -1,10 +1,10 @@
 n,source,format,origine,lignes
 1,FAOSTAT élevage,CSV,Public,40
 2,FAOSTAT prix producteurs,CSV,Public,4561
-3,WAHIS foyers de maladies,CSV,Public,340
+3,WAHIS foyers de maladies,CSV,Public,465
 4,Cheptel par exploitation,PostgreSQL,Généré,47900
 5,Vaccinations,MySQL,Généré,151420
-6,Mouvements et transhumance,JSON,Généré,8159
+6,Mouvements et transhumance,JSON,Généré,8152
 7,Abattages,CSV,Généré,2809
 8,Production de lait et d'œufs,Excel,Généré,136258
 9,Alimentation et fourrage,CSV,Généré,110437

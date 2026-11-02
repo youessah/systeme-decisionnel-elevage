@@ -51,13 +51,15 @@ Table d'appui : `ref_taux_change` (mois × devise), alimentée par la source 15.
 | Sexe et statut reproducteur (indicateur 9) | Présents dans `animal.csv`. |
 | Dates de rappel (indicateur 15) | `numero_dose`, `date_rappel_prevue` et `date_rappel_realisee` présents dans `vaccination.csv`. |
 | `poids_vif_kg` des abattages (indicateur 10) | **Total de la ligne**, pas poids par animal (ex. 584 animaux → 1 226 kg, soit environ 2 kg chacun : des volailles). Formule : Σ `poids_vif_kg` ÷ Σ `nb_animaux`, **à ventiler par espèce** : un poulet de 2 kg et un bovin de plusieurs centaines de kg rendent la moyenne globale sans sens. |
-| Niveau de WAHIS | **Région** (`Nord`, `Ouest`, `Extrême-Nord`). Les foyers se rattachent aux lignes `niveau = 'region'` de `dim_lieu`. |
+| Niveau de WAHIS | **Région** : Adamaoua, Extrême-Nord et Ouest. Le Nord, présent dans l'export du 06/10, est hors périmètre et écarté par l'ETL. Les foyers se rattachent aux lignes `niveau = 'region'` de `dim_lieu`. |
+| Indicateur 3 (couverture vaccinale) | Vue `bi.v_couverture_vaccinale` (`sql/08_vues_bi.sql`) : animaux à jour ÷ animaux éligibles, par exploitation, vaccin et mois, ruminants seulement. « À jour » = dernière dose + intervalle de rappel + 30 jours couvre la fin du mois. |
+| Tolérance du rappel (indicateur 15) | `rappel_a_temps` = rappel réalisé au plus tard **30 jours après** la date prévue (même tolérance que la couverture). Sans tolérance, l'indicateur serait artificiellement proche de 0. |
 
 ## 4. Points encore ouverts
 
 | Point | Comment le vérifier | Impact |
 |---|---|---|
-| Couverture de WAHIS : seulement 3 régions (Nord, Ouest, Extrême-Nord) dans le fichier | À mentionner dans le dossier | L'indicateur 11 et le NLP 2 ne couvrent que ces régions ; les autres sont vides, pas à zéro |
-| Sens de la colonne `origine` (WAHIS et `pression_foyers_semestre.csv`) | `generators/inspect_wahis.py` | Clé de `fact_foyer_maladie` |
+| Couverture de WAHIS | Les **trois exports** réels (`wahis_quantitatif_2026-10-05.csv`, `wahis_quantitatif_cameroun.csv`, `wahis_quantitatif_complet.csv`) sont fusionnés et dédoublonnés ; seules les 3 régions du périmètre et les années à partir de 2020 (début du calendrier) sont chargées. WAHIS ne publie rien après 2023 : 2024-2025 vient du fichier simulé `wahis_quantitatif_simule_2024_2025.csv` (`generators/15_wahis_simule.py`) | L'indicateur 11 et le NLP 2 couvrent les 3 régions ; la part réelle et la part simulée restent distinguables |
+| Sens de la colonne `origine` | Déduite du **nom du fichier** : contient `simule` → `SIMULE`, sinon `WAHIS`. `pression_foyers_semestre.csv` est un facteur caché de la simulation : ce n'est **jamais** une source de l'ETL | Clé de `fact_foyer_maladie` |
 | Les libellés `origine` et `destination` des mouvements existent-ils dans `ref_lieux` ? | Comparer les libellés | Sinon `lieu_*_sk = -1` et le libellé est conservé |
 | Espèce rattachée au lait (`nb_vaches_lactation`) | Règle de gestion | Hypothèse retenue : Bovins pour le lait, Volailles pour les œufs |
